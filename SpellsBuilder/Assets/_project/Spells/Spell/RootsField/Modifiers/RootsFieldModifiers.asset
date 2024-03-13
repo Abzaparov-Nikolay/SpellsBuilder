@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9adb85a877cd7f143a2cccc9467f634e, type: 3}
+  m_Name: RootsFieldModifiers
+  m_EditorClassIdentifier: 
+  ModifiersList:
+  - {fileID: 11400000, guid: edbf0aac5bd9bc5498894eb775c7a58a, type: 2}
+  - {fileID: 11400000, guid: b5aa894bf89cbd54a9ce434976abf792, type: 2}
+  - {fileID: 11400000, guid: 4fbfa2e3c3103624b9ada33793ed1024, type: 2}
