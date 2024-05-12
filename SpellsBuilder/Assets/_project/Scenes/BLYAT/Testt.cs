@@ -9,7 +9,7 @@ public class Testt : MonoBehaviour
     {
         Debug.developerConsoleEnabled= true;
         //Debug.developerConsoleVisible = true;
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void ChangeVisibility()

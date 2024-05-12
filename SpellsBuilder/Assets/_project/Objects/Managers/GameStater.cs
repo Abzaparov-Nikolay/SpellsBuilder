@@ -17,6 +17,7 @@ public class GameStater : NetworkBehaviour
     public static Action GamePaused;
     public static Action GameUnpaused;
     public static Action GameEnded;
+    public static Action GameWon;
 
     private bool notStarted = true;
     private int stopSources = 0;
@@ -39,6 +40,10 @@ public class GameStater : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         OnFirstSpanw.OnObjectServerSpawn += PlayerSpawned;
+        if (IsServer)
+        {
+            StartCoroutine(CheckVictory());
+        }
         //ExperienceManager.OnLvlUp += StopGame;
     }
 
@@ -93,6 +98,18 @@ public class GameStater : NetworkBehaviour
         GameEnded?.Invoke();
     }
 
+    private void Victory()
+    {
+        if (!IsServer)
+            return;
+        GameWonClientRpc();
+    }
+
+    [ClientRpc]
+    public void GameWonClientRpc()
+    {
+        GameWon?.Invoke();
+    }
 
 
     public static void StopGame()
@@ -115,4 +132,16 @@ public class GameStater : NetworkBehaviour
         }
     }
 
+    private IEnumerator CheckVictory()
+    {
+        while (true)
+        {
+            int minutes = Mathf.FloorToInt(LevelTimer.Value / 60F);
+            if (minutes >= 10)
+            {
+                Victory();
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
 }

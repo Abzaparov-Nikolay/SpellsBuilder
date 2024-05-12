@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d874d774a7b62f4892a3e8810cde63d, type: 3}
   m_Name: Slick
   m_EditorClassIdentifier: 
-  Name: Slick armor
-  Sprite: {fileID: 21300000, guid: ceab2f8f1adb39d4ab2869bce22d7ac9, type: 3}
+  Name: Plate armor
+  Sprite: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
   Buffs:
   - {fileID: 11400000, guid: 34c5488fa85b9644893d86f9ebd83548, type: 2}

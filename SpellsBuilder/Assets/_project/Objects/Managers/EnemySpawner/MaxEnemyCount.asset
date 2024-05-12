@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a94d346c2c6924c898c421265d9a57, type: 3}
   m_Name: MaxEnemyCount
   m_EditorClassIdentifier: 
-  initialValue: 10
-  value: 10
+  initialValue: 3
+  value: 3
   resetBetweenScenes: 1

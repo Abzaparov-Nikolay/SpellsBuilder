@@ -8,15 +8,28 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputDirectionProvider : NetworkBehaviour
+public class InputDirectionProvider : MonoBehaviour
 {
+    private static InputDirectionProvider instance;
     [SerializeField] private Variable<Transform> cameraTransform;
     private Vector2 output;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        if(instance == this)
+        {
+            instance = null;
+        }
+    }
 
     public void OnMovement(InputAction.CallbackContext callbackContext)
     {
-        if (!base.IsOwner) return;
+        //if (!base.IsOwner) return;
         //Debug.Log("PIPI");
         var wasd = callbackContext.ReadValue<Vector2>();
         var cameraRotation = cameraTransform.Value.eulerAngles;
@@ -28,8 +41,8 @@ public class InputDirectionProvider : NetworkBehaviour
         output = (worldInputDirection);
     }
 
-    public Vector2 Get()
+    public static Vector2 Get()
     {
-        return output;
+        return instance.output;
     }
 }

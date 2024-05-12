@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpeedBuff
   m_EditorClassIdentifier: 
   Stat: 0
-  Value: 100
+  Value: 5

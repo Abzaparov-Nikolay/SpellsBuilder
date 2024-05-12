@@ -39,5 +39,7 @@ public static class VectorExtensions
         vector.y = magnitude * Mathf.Sin(newAngle * Mathf.Deg2Rad);
         return vector;
     }
+
+    public static Vector3 NoY(this Vector3 vector) => new Vector3(vector.x, 0, vector.z);
 }
 

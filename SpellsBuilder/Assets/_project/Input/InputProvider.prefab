@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6864957408143022890}
   - component: {fileID: 406777199574284501}
   - component: {fileID: 1364877456987914465}
+  - component: {fileID: 16663974965322796}
   m_Layer: 0
   m_Name: InputProvider
   m_TagString: Untagged
@@ -205,6 +206,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ac98d6b0-f8a3-41f9-af71-e6010c139f1a
     m_ActionName: 'Gameplay/sixth[/Keyboard/6]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 16663974965322796}
+        m_TargetAssemblyTypeName: InputMenuProvider, Assembly-CSharp
+        m_MethodName: OnEscapeClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b032f8fa-2d49-4a72-b04b-278c66f67a72
+    m_ActionName: 'Gameplay/Escape[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -222,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 194001779
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -265,5 +282,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a5d4b857d7a57546b313364c0824906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &16663974965322796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809248347847793805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af44b1f80e2eda48ae3f7420a480489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

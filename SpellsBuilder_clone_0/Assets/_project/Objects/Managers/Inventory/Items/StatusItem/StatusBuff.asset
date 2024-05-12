@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StatusBuff
   m_EditorClassIdentifier: 
   Stat: 4
-  Value: 30
+  Value: 5

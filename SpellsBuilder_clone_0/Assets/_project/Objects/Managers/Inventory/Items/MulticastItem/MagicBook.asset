@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MagicBook
   m_EditorClassIdentifier: 
   Name: Magic Book
-  Sprite: {fileID: 21300000, guid: ceab2f8f1adb39d4ab2869bce22d7ac9, type: 3}
+  Sprite: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
   Buffs:
   - {fileID: 11400000, guid: 800cece7cb072c94598096be67f67008, type: 2}

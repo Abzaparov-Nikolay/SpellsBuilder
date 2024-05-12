@@ -1,5 +1,3 @@
-//using FishNet.Object;
-//using FishNet.Object.Synchronizing;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -63,4 +61,6 @@ public class LevelTimer : NetworkBehaviour
     {
         started = false;
     }
+
+    
 }

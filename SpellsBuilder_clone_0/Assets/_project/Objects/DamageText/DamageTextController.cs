@@ -32,9 +32,15 @@ public class DamageTextController : NetworkBehaviour
     {
         transform.SetSiblingIndex(0);
 
-        tmp.text = $"{(data.number > 0 ? "" : "+")}{Mathf.Abs(data.number)}";
-        RotateToCamera();
+        string niceTime = string.Format("{0:0.0}", Mathf.Abs(data.number));
 
+        tmp.text = $"{(data.number > 0 ? "" : "+")}{niceTime}";
+        RotateToCamera();
+        if (data.number < 0)
+        {
+            tmp.color = new Color(79 / 255, 255 / 255, 54 / 255);
+            tmp.color = new Color(101 / 255, 255 / 255, 100 / 255);
+        }
     }
 
     public void RotateToCamera()
@@ -43,4 +49,6 @@ public class DamageTextController : NetworkBehaviour
         transform.LookAt(dirToCam);//.rotation.SetLookRotation(dirToCam);
         transform.rotation = Quaternion.Euler(new Vector3(33, -37, 0));//.SetEulerRotation(new Vector3(0,-45,0));
     }
+
+    
 }

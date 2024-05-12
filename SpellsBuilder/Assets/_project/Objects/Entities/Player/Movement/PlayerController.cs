@@ -2,16 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-//using FishNet;
-//using FishNet.Connection;
-//using FishNet.Object;
-//using FishNet.Object.Synchronizing;
 using Unity.Netcode;
 
 public class PlayerController : NetworkBehaviour
 {
-    [SerializeField] private InputDirectionProvider inputDirection;
-    [SerializeField] private InputMousePosProvider inputMousePosition;
     [SerializeField]
     private Rigidbody body;
     float threesectimer = 0f;
@@ -44,11 +38,11 @@ public class PlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        body.velocity = new Vector3(inputDirection.Get().x, 0, inputDirection.Get().y) * speed * InventorySpeed;
+        body.velocity = new Vector3(InputDirectionProvider.Get().x, 0, InputDirectionProvider.Get().y) * speed * InventorySpeed;
         if (rotateToMouse)
         {
 
-            var facingDir = (inputMousePosition.Get() - body.position).normalized;
+            var facingDir = (InputMousePosProvider.Get() - body.position).normalized;
             var dir = new Vector3(facingDir.x, 0, facingDir.z).normalized;
             body.rotation = Quaternion.LookRotation(dir, Vector3.up);
 

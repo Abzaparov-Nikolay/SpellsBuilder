@@ -14,7 +14,7 @@ public abstract class SpellConfigurator : NetworkBehaviour
 
     [SerializeField] private ModifierList buffs;
 
-    //protected Action modifiersApplied;
+    [SerializeField] protected bool sizable = true;
 
     public void SetModifiers(List<ElementType> elements)
     {
@@ -69,7 +69,8 @@ public abstract class SpellConfigurator : NetworkBehaviour
     protected virtual void OnModifiersApplied()
     {
         var pick = PlayersInventory.GetStatValue(OwnerClientId, PlayerStat.SpellSize);
-        this.transform.localScale *= pick;
+        if (sizable)
+            this.transform.localScale *= pick;
     }
 
     protected virtual void HandleRootModifier(int count, Modifier buff)

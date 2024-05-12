@@ -6,16 +6,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-public class InputMousePosProvider : NetworkBehaviour
+public class InputMousePosProvider : MonoBehaviour
 {
     private Vector3 output;
     private InputAction.CallbackContext lastCallback;
+    private static InputMousePosProvider instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
 
     public void OnMousePosChange(InputAction.CallbackContext callbackContext)
     {
-        if (!base.IsOwner) return;
         lastCallback = callbackContext;
-        //Recalculate();
     }
 
     public void Recalculate()
@@ -24,9 +34,9 @@ public class InputMousePosProvider : NetworkBehaviour
         output = CameraHolder.ScreenToWorld(screen);
     }
 
-    public Vector3 Get()
+    public static Vector3 Get()
     {
-        Recalculate();
-        return output;
+        instance.Recalculate();
+        return instance.output;
     }
 }

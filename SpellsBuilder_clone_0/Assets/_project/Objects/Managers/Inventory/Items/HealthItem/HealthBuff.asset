@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HealthBuff
   m_EditorClassIdentifier: 
   Stat: 1
-  Value: 100
+  Value: 10

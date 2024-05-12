@@ -10,9 +10,9 @@ using UnityEngine.UI;
 public class InputMagicProvider : MonoBehaviour
 {
     //[SerializeField] private MagicInputHandler handler;
-    public Action<CastTarget> CastStarted;
-    public Action CastStopped;
-    public Action<ElementType> ElementPressed;
+    public static Action<CastTarget> CastStarted;
+    public static Action CastStopped;
+    public static Action<ElementType> ElementPressed;
 
     public void OnFirstSpell(InputAction.CallbackContext context)
     {

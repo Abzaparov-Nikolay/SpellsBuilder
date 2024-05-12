@@ -5,15 +5,17 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Events;
+
 
 public class EnemySpawner : NetworkBehaviour
 {
     [SerializeField] Reference<int> EnemyMax;
     public int CurrentEnemyCount { get; private set; }
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject walkingEnemyPrefab;
+    [SerializeField] GameObject flyingEnemyPrefab;
 
     private bool stop;
+    private float enemySwitch;
 
     private void Update()
     {
@@ -22,24 +24,26 @@ public class EnemySpawner : NetworkBehaviour
         if (GetMaxEnemyAmount() > CurrentEnemyCount)
         {
             var hits = new RaycastHit[8];
-            //var randPos = new Vector3(10, 0, 10);
             var randPlayer = PlayersTracker.Instance.GetRandom();
             if (randPlayer == null) return;
             var rand = UnityEngine.Random.value;
             var randPos = new Vector3(10 * Mathf.Cos(rand * 2 * Mathf.PI) + randPlayer.position.x,
-                0,
+                1,
                 10 * Mathf.Sin(rand * 2 * Mathf.PI) + randPlayer.position.z);
-            while (Physics.BoxCastNonAlloc(randPos, new Vector3(0.5f, 0.5f, 0.5f), Vector3.up, hits, Quaternion.identity, 1f) != 0)
+            var tries = 0;
+            while (Physics.BoxCastNonAlloc(randPos, new Vector3(0.9f, 0.9f, 0.9f), Vector3.up, hits, Quaternion.identity, 1f) != 0 && tries < 50)
             {
                 rand = UnityEngine.Random.value;
                 randPos = new Vector3(10 * Mathf.Cos(rand * 2 * Mathf.PI) + randPlayer.position.x,
                     1,
                     10 * Mathf.Sin(rand * 2 * Mathf.PI) + randPlayer.position.z);
+                tries++;
             }
-            var enemy = Instantiate(enemyPrefab, randPos, Quaternion.identity);
+            var cp = enemySwitch % 4 == 0 ? flyingEnemyPrefab : walkingEnemyPrefab;
+            enemySwitch++;
+            var enemy = Instantiate(cp, randPos, Quaternion.identity);
             enemy.GetComponent<Death>().OnDeathWithGameObject.AddListener(Countdown);
             enemy.GetComponent<NetworkObject>().Spawn(true);
-            //Spawn(enemy);
             CurrentEnemyCount++;
         }
     }

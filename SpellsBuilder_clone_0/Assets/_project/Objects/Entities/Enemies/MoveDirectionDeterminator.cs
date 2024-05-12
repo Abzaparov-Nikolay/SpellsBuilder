@@ -24,6 +24,33 @@ public class MoveDirectionDeterminator : NetworkBehaviour
         return Vector3.zero;
     }
 
+    public float GetDistance()
+    {
+        if (aggroSources.Count != 0 && aggroSources.All(tr => tr != null))
+        {
+            return (aggroSources
+                .MinBy(tr => (tr.position - transform.position).magnitude).position
+                - transform.position).NoY().magnitude;
+        }
+        var playerPosition = PlayersTracker.Instance.GetNearest(transform);
+        if (playerPosition != null)
+            return (playerPosition.position - transform.position).NoY().magnitude;
+        return -1f;
+    }
+
+    public Transform GetTarget()
+    {
+        if (aggroSources.Count != 0 && aggroSources.All(tr => tr != null))
+        {
+            return aggroSources
+                .MinBy(tr => (tr.position - transform.position).magnitude);
+        }
+        var playerPosition = PlayersTracker.Instance.GetNearest(transform);
+        if (playerPosition != null)
+            return playerPosition;
+        return null;
+    }
+
     public void AddAggroSource(GameObject obj)
     {
         if (!IsServer) return;

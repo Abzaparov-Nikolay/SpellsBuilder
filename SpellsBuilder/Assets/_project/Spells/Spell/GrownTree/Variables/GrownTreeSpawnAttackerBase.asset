@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRates:
   - AttackSpawnType: 2
-    AttackRate: 0.5
+    AttackRate: 0.3
   - AttackSpawnType: 1
-    AttackRate: 1
+    AttackRate: 0.3
   - AttackSpawnType: 0
-    AttackRate: 3
+    AttackRate: 0.3

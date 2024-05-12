@@ -35,7 +35,7 @@ public class ExperienceManager : NetworkBehaviour
         base.OnNetworkDespawn();
         AddAmountAll -= AddAmount;
         Amount.OnValueChanged -= AmountUpped;
-        Level.OnValueChanged += LevelUpped;
+        Level.OnValueChanged -= LevelUpped;
 
     }
 
@@ -49,9 +49,9 @@ public class ExperienceManager : NetworkBehaviour
     private void AmountUpped(float prev, float now)
     {
         OnAmountChange?.Invoke(now);
-        if (IsServer && Level.Value < (int)now /levelThreshHold)
+        if (IsServer && Level.Value < (int)now / levelThreshHold)
         {
-            Level.Value = (int)now / levelThreshHold;
+            Level.Value = (int)now / levelThreshHold * (Level.Value + 1);
         }
         //update ui
     }

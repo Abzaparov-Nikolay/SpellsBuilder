@@ -13,11 +13,7 @@ using UnityEngine.Events;
 public class Health : NetworkBehaviour
 {
     public Reference<float> MaxInit;
-    private NetworkVariable<float> Max = new();
-    private NetworkVariable<float> Current = new();
-
-    private NetworkVariable<float> Regeneration = new();
-
+    private NetworkVariable<HealthStats> Stats = new();
     [SerializeField] private UnityEvent<float> OnDamaged;
     [SerializeField] private UnityEvent<float> OnCurrentZero;
     private float InventoryValue => PlayersInventory.GetStatValue(base.OwnerClientId, PlayerStat.MaxHealth);
@@ -28,9 +24,10 @@ public class Health : NetworkBehaviour
     private void ChangeCurrent(float newValue)
     {
         if (!IsServer) return;
-        var amount = Current.Value - newValue;
-        Current.Value = newValue < Max.Value ? newValue : Max.Value;
-        if (Current.Value <= 0)
+        var amount = Stats.Value.Current - newValue;
+        var nextValue = newValue < Stats.Value.Max ? newValue : Stats.Value.Max;
+        SetNewValue(Stats.Value.Max, nextValue, Stats.Value.Regeneration);
+        if (Stats.Value.Current <= 0)
         {
             OnCurrentZero?.Invoke(amount);
         }
@@ -47,25 +44,25 @@ public class Health : NetworkBehaviour
     private void ChangeMax(float newValue)
     {
         if (!IsServer) return;
-        Max.Value = newValue;
+        SetNewValue(newValue, Stats.Value.Current, Stats.Value.Regeneration);
     }
 
     private void ChangeRegen(float newValue)
     {
         if (!IsServer) return;
-        Regeneration.Value = newValue;
+        SetNewValue(Stats.Value.Max, Stats.Value.Current, newValue);
     }
 
     public void TakeDamage(float amount)
     {
         if (!base.IsServer) return;
 
-        ChangeCurrent(Current.Value - amount);
+        ChangeCurrent(Stats.Value.Current - amount);
     }
 
     public float Get()
     {
-        return Current.Value;
+        return Stats.Value.Current;
     }
 
     private void Update()
@@ -87,39 +84,70 @@ public class Health : NetworkBehaviour
         {
             ChangeMax(MaxInit * InventoryValue);
         }
-        ChangeCurrent(Get() + Regeneration.Value);
+        ChangeCurrent(Get() + Stats.Value.Regeneration);
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        Max.OnValueChanged += OnValuesChange;
-        Current.OnValueChanged += OnValuesChange;
+        Stats.OnValueChanged += OnValuesChange;
         if (!IsServer) return;
-        Max.Value = MaxInit;
-        Current.Value = MaxInit;
+        SetNewValue(MaxInit, MaxInit, 0);
     }
 
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        Max.OnValueChanged -= OnValuesChange;
-        Current.OnValueChanged -= OnValuesChange;
+        Stats.OnValueChanged -= OnValuesChange;
     }
 
     public void AddBonus(float percentage)
     {
         if (!IsServer) return;
-        var newMax = Max.Value * (1 + percentage / 100);
-        var newCurrent = Current.Value < newMax
+        var newMax = Stats.Value.Max * (1 + percentage / 100);
+        var newCurrent = Stats.Value.Current < newMax
             ? newMax
-            : Current.Value * newMax / Max.Value;
+            : Stats.Value.Current * newMax / Stats.Value.Max;
         ChangeMax(newMax);
         ChangeCurrent(newCurrent);
     }
 
-    private void OnValuesChange(float prev, float current)
+    private void SetNewValue(float newMAx, float newCurrent, float newRegen)
     {
-        ShowChangesOnClient?.Invoke(Max.Value, Current.Value);
+        Stats.Value = new HealthStats(newMAx, newCurrent, newRegen);
+    }
+
+    private void OnValuesChange(HealthStats prev, HealthStats current)
+    {
+        ShowChangesOnClient?.Invoke(current.Max, current.Current);
+    }
+}
+
+[Serializable]
+public struct HealthStats : IEquatable<HealthStats>, INetworkSerializable
+{
+    public float Max;
+    public float Current;
+    public float Regeneration;
+
+    public HealthStats(float max, float current, float regen)
+    {
+        Max = max;
+        Current = current;
+        Regeneration = regen;
+    }
+
+    public bool Equals(HealthStats other)
+    {
+        return Max == other.Max
+            && Current == other.Current
+            && Regeneration == other.Regeneration;
+    }
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref Max);
+        serializer.SerializeValue(ref Current);
+        serializer.SerializeValue(ref Regeneration);
     }
 }

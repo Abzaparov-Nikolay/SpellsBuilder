@@ -12,7 +12,7 @@ public class MagicInputHandler : NetworkBehaviour
 {
     public Action<List<Element>> OnOrderChange;
 
-    [SerializeField] private InputMagicProvider inputMagicProvider;
+    //[SerializeField] private InputMagicProvider inputMagicProvider;
     [SerializeField] private Spawner Spawner;
     public ElementsList Magics;
 
@@ -47,9 +47,9 @@ public class MagicInputHandler : NetworkBehaviour
 
     private void Awake()
     {
-        inputMagicProvider.CastStarted += CastStarted;
-        inputMagicProvider.CastStopped += CastStopped;
-        inputMagicProvider.ElementPressed += MagicInput;
+        InputMagicProvider.CastStarted += CastStarted;
+        InputMagicProvider.CastStopped += CastStopped;
+        InputMagicProvider.ElementPressed += MagicInput;
         CurrentOrder = new NetworkList<int>(new List<int>(),
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner);
@@ -63,9 +63,9 @@ public class MagicInputHandler : NetworkBehaviour
 
     public override void OnDestroy()
     {
-        inputMagicProvider.CastStarted -= CastStarted;
-        inputMagicProvider.CastStopped -= CastStopped;
-        inputMagicProvider.ElementPressed -= MagicInput;
+        InputMagicProvider.CastStarted -= CastStarted;
+        InputMagicProvider.CastStopped -= CastStopped;
+        InputMagicProvider.ElementPressed -= MagicInput;
         CurrentOrder.OnListChanged -= OnOrderListChange;
         CurrentOrder.Dispose();
     }
