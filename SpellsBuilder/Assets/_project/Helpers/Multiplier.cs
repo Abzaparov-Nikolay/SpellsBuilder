@@ -24,10 +24,7 @@ public class Multiplier : IEnumerable<float>
         return GetEnumerator();
     }
 
-    public static implicit operator float(Multiplier list)
-    {
-        return list.Sum() / 100;
-    }
+    public static implicit operator float(Multiplier list) => list.Sum() / 100;
 
     public void Add(float percentage)
     {
