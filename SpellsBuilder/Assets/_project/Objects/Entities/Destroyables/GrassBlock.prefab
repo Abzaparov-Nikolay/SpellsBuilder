@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 303201507598695638}
   - component: {fileID: 5212851289560218551}
   - component: {fileID: 4884150044853736924}
-  - component: {fileID: 589643004984702511}
   - component: {fileID: 2069217079607896647}
   - component: {fileID: 9208427495717757084}
   - component: {fileID: 8650559704121317987}
+  - component: {fileID: 6864408880486867613}
+  - component: {fileID: 7876426976116705044}
+  - component: {fileID: 5415931318339694614}
   m_Layer: 6
   m_Name: GrassBlock
   m_TagString: Untagged
@@ -76,12 +78,24 @@ MonoBehaviour:
     variable: {fileID: 11400000, guid: 3f7698abab71da84691ebdfb72fa9951, type: 2}
   OnDamaged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7876426976116705044}
+        m_TargetAssemblyTypeName: TakeDamageAnimator, Assembly-CSharp
+        m_MethodName: Animate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnCurrentZero:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 589643004984702511}
-        m_TargetAssemblyTypeName: Death, Assembly-CSharp
+      - m_Target: {fileID: 5415931318339694614}
+        m_TargetAssemblyTypeName: DeathScenePlaced, Assembly-CSharp
         m_MethodName: Die
         m_Mode: 1
         m_Arguments:
@@ -92,25 +106,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &589643004984702511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4987097062403002197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fde6503dce31784d9c25164d2e63938, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeathWithGameObject:
-    m_PersistentCalls:
-      m_Calls: []
-  DestroyOnDeath: 1
 --- !u!114 &2069217079607896647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +153,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: {fileID: 11400000, guid: 0f835494a99db2e40ba6e813f43b607f, type: 2}
+--- !u!111 &6864408880486867613
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987097062403002197}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: bc7d02dc8d783674282c2f5b5a0eb022, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bc7d02dc8d783674282c2f5b5a0eb022, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
+--- !u!114 &7876426976116705044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987097062403002197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c2a4a8071652e45b27369d6c47e72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animation: {fileID: 6864408880486867613}
+--- !u!114 &5415931318339694614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987097062403002197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7520eecd2192ef4d96e5795ceff034c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathWithGameObject:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8242318561010418169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,11 +252,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5dc6c4c9afd18f24fa9c7f6218df7834, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ee8af93f6543af1418cb59d1c38e78be, type: 2}
+      objectReference: {fileID: 2100000, guid: cb1d0d13cee3cf648922727fa89f6e72, type: 2}
     - target: {fileID: -7511558181221131132, guid: 5dc6c4c9afd18f24fa9c7f6218df7834, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5ca27f3da1ff93f439357e481e62dce1, type: 2}
+      objectReference: {fileID: 2100000, guid: 66f42b0850241c64fa31eec6e03d37bc, type: 2}
     - target: {fileID: 919132149155446097, guid: 5dc6c4c9afd18f24fa9c7f6218df7834, type: 3}
       propertyPath: m_Name
       value: block

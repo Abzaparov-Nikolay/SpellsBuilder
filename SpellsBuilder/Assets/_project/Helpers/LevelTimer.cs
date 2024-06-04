@@ -25,15 +25,15 @@ public class LevelTimer : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        GameStater.GameStarted += StartTimer;
-        GameStater.GameEnded += StopTimer;
+        GameStater.GameStarted += StartTimerClientRpc;
+        GameStater.GameEnded += StopTimerClientRpc;
     }
 
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        GameStater.GameStarted -= StartTimer;
-        GameStater.GameEnded -= StopTimer;
+        GameStater.GameStarted -= StartTimerClientRpc;
+        GameStater.GameEnded -= StopTimerClientRpc;
     }
 
 
@@ -52,12 +52,14 @@ public class LevelTimer : NetworkBehaviour
         }
     }
 
-    void StartTimer()
+    [ClientRpc]
+    void StartTimerClientRpc()
     {
         started = true;
     }
 
-    void StopTimer()
+    [ClientRpc]
+    void StopTimerClientRpc()
     {
         started = false;
     }

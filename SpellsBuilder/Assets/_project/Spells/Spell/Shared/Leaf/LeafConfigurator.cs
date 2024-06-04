@@ -11,7 +11,13 @@ public class LeafConfigurator : SpellConfigurator
     public Lifetime lifetime;
     public DamageDealer damageDealer;
     public Transform scalableTransform;
-
+    public VusialChange visualChanger;
+    protected override void OnModifiersApplied()
+    {
+        base.OnModifiersApplied();
+        visualChanger.Attack();
+        visualChanger.Play();
+    }
     protected override void HandleFireModifier(int count, Modifier buff)
     {
         if (buff.UseStatusEffect)
@@ -20,6 +26,7 @@ public class LeafConfigurator : SpellConfigurator
         statusApplier.AddPowerBonus(buff.StatusPower * count);
         //bigger status power
         lifetime.AddTimeBonus(count * buff.Lifetime);
+        visualChanger.Heal();
         //lower lifetime of spawned leaves
     }
 

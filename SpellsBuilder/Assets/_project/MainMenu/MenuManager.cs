@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField ipAddress;
     [SerializeField] private TMP_InputField port;
+    [SerializeField] private TMP_InputField hostPort;
     [SerializeField] private GameObject ShutdownButton;
 
     private void Start()
@@ -32,9 +33,14 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void StartSingle()
+    {
+        BootstrapManager.Instance.SingleLobby();
+    }
+
     public void StartHost()
     {
-        BootstrapManager.Instance.HostLobby(ipAddress.text, ushort.Parse(port.text));
+        BootstrapManager.Instance.HostLobby("", ushort.Parse(hostPort.text));
     }
 
     public void StartClient()

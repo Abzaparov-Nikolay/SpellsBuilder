@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffs: {fileID: 11400000, guid: 0c7ba3d3e48129c4db73ee1712e7bb23, type: 2}
+  sizable: 1
   scalableTransform: {fileID: 4202694584892346159}
   dealer: {fileID: 8971723737594900118}
   statusApplier: {fileID: 4867839376210455551}
@@ -292,9 +293,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
+  SyncRotAngleX: 1
   SyncRotAngleY: 1
-  SyncRotAngleZ: 0
+  SyncRotAngleZ: 1
   SyncScaleX: 1
   SyncScaleY: 1
   SyncScaleZ: 1
@@ -375,6 +376,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 8cf77b90691714542ab166976e4e31f7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc3dd4e67938f604b8cb261b36381395, type: 2}
     - target: {fileID: 6400000, guid: 8cf77b90691714542ab166976e4e31f7, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -416,6 +421,7 @@ MonoBehaviour:
   RotatableTransforms:
   - {fileID: 5542854130152544350}
   speed: 60
+  yRot: 0
 --- !u!4 &5542854130152544350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8cf77b90691714542ab166976e4e31f7, type: 3}

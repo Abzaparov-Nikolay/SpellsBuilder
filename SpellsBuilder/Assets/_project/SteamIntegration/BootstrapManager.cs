@@ -35,6 +35,11 @@ public class BootstrapManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(Names.BootstrapScene);
     }
 
+    public void SingleLobby()
+    {
+        NetworkManager.Singleton.StartHost();
+    }
+
     public void HostLobby(string ipAddress, ushort port)
     {
         uPnPHelper.NewMessage += LogMessage;

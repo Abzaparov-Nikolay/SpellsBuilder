@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    private Transform mainCamera;
+    [SerializeField] private Reference<Transform> mainCamera;
 
     private void OnEnable()
     {
-        mainCamera = Camera.main.transform;
+        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     void LateUpdate()
     {
-        transform.LookAt(transform.position + mainCamera.forward);
+        transform.LookAt(transform.position + mainCamera.Get().forward);
     }
 }

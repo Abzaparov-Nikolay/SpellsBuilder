@@ -120,6 +120,7 @@ public class SpawnAttacker : NetworkBehaviour
         AttackSpawnType = spawnType;
         AttackPrefab = attackPrefab;
         modifiersToPass = modifiers;
+        SetBaseAttackRate();
     }
 
     public bool HasAttack()

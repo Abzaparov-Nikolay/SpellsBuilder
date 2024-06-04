@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 406777199574284501}
   - component: {fileID: 1364877456987914465}
   - component: {fileID: 16663974965322796}
+  - component: {fileID: 2317443467519615466}
   m_Layer: 0
   m_Name: InputProvider
   m_TagString: Untagged
@@ -222,6 +223,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b032f8fa-2d49-4a72-b04b-278c66f67a72
     m_ActionName: 'Gameplay/Escape[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2317443467519615466}
+        m_TargetAssemblyTypeName: InputCameraRotator, Assembly-CSharp
+        m_MethodName: OnLeftHold
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c9f05262-006d-4a10-8217-969867ba1fa0
+    m_ActionName: Gameplay/LeftArrow
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2317443467519615466}
+        m_TargetAssemblyTypeName: InputCameraRotator, Assembly-CSharp
+        m_MethodName: OnRightHold
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b40052b8-5491-461f-96f0-20785a253142
+    m_ActionName: Gameplay/Right
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -294,5 +327,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6af44b1f80e2eda48ae3f7420a480489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2317443467519615466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809248347847793805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055088ba36e046745a34cf5c79b8f052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

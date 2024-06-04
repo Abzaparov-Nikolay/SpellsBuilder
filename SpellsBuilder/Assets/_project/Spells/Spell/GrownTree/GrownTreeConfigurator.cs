@@ -5,13 +5,10 @@ using UnityEngine;
 
 public class GrownTreeConfigurator : SpellConfigurator
 {
-    //public GameObject leafPrefab;
-    //public GameObject rootPrefab;
-    //public GameObject aoeCircleAttackPrefab;
-
     [SerializeField] private SpawnAttacker attacker;
     [SerializeField] private EnemyAggrer aggrer;
     [SerializeField] private Lifetime lifetime;
+    [SerializeField] private VusialChange visualChanger;
 
     [SerializeField] private Health health;
 
@@ -47,10 +44,13 @@ public class GrownTreeConfigurator : SpellConfigurator
         //or
         //attack with fire aoe attack
         if (!modifiersList.Any(type => type == ElementType.Roots || type == ElementType.Leaves))
+        {
+            visualChanger.Attack();
             attacker.Configure(buff.Firerate * count,
                 buff.FiredPrefab,
                 buff.AttackSpawnType,
                 modifiersList);
+        }
     }
 
     protected override void HandleHarmonyModifier(int count, Modifier buff)
@@ -62,15 +62,19 @@ public class GrownTreeConfigurator : SpellConfigurator
         health.AddBonus(buff.Health * count);
 
         if (!modifiersList.Any(type => type == ElementType.Roots || type == ElementType.Leaves))
+        {
             attacker.Configure(buff.Firerate * count,
                 buff.FiredPrefab,
                 buff.AttackSpawnType,
                 modifiersList);
+            visualChanger.Heal();
+        }
     }
 
     protected override void OnModifiersApplied()
     {
         base.OnModifiersApplied();
         lifetime.AddTimeBonus(PlayersInventory.GetStatValue(OwnerClientId, PlayerStat.SpellLifetime) * 100 - 100);
+        visualChanger.Play();
     }
 }

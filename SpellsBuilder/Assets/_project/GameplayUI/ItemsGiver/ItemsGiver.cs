@@ -40,9 +40,16 @@ public class ItemsGiver : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        (int first, int second, int third) = (Random.Range(0, allItems.Items.Count),
+        
+        (int first, int second, int third) = (0,0,0);
+        var tryis = 0;
+        while(first == second||second == third || first == third || tryis > 30)
+        {
+            (first, second, third) = (Random.Range(0, allItems.Items.Count),
             Random.Range(0, allItems.Items.Count),
             Random.Range(0, allItems.Items.Count));
+            tryis++;
+        }
 
         playersReady = 0;
         ShowItemsClientRpc(first, second, third);

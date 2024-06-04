@@ -16,6 +16,7 @@ public class Bootstraper : MonoBehaviour
     private void Start()
     {
         bootstraped = true;
+        Application.targetFrameRate = 60;
     }
 
     private void OnDestroy()

@@ -10,6 +10,7 @@ public class BlackHoleConfigurator : SpellConfigurator
     [SerializeField] private Lifetime lifetime;
     [SerializeField] private BlackHoleController controller;
     [SerializeField] private StatusApplier statusApplier;
+    [SerializeField] private ParticleSystem particleSystem;
 
     protected override void HandleMoonModifier(int count, Modifier buff)
     {
@@ -33,6 +34,11 @@ public class BlackHoleConfigurator : SpellConfigurator
         base.HandleHarmonyModifier(count, buff);
         puller.SetPull(buff.PullOut);
         lifetime.AddTimeBonus(buff.Lifetime * count);
+        var psCurve = new AnimationCurve();
+        psCurve.AddKey(0f, 0f);
+        psCurve.AddKey(1f, 1f);
+        var ps = particleSystem.sizeOverLifetime;
+        ps.size = new ParticleSystem.MinMaxCurve(1, psCurve);
     }
 
     protected override void HandleTreeModifier(int count, Modifier buff)

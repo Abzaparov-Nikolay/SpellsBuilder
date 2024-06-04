@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 717761431772094417}
   - component: {fileID: 7616836810099601180}
   - component: {fileID: 7725537920863335973}
-  - component: {fileID: 7324518613124471480}
   - component: {fileID: 8760197648979412752}
   - component: {fileID: 8041355710338233784}
+  - component: {fileID: 7568075087028958515}
+  - component: {fileID: 5509421898803025991}
+  - component: {fileID: 2585128564965718986}
   m_Layer: 6
   m_Name: fence
   m_TagString: Untagged
@@ -89,12 +91,24 @@ MonoBehaviour:
     variable: {fileID: 11400000, guid: 3f7698abab71da84691ebdfb72fa9951, type: 2}
   OnDamaged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7568075087028958515}
+        m_TargetAssemblyTypeName: TakeDamageAnimator, Assembly-CSharp
+        m_MethodName: Animate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnCurrentZero:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7324518613124471480}
-        m_TargetAssemblyTypeName: Death, Assembly-CSharp
+      - m_Target: {fileID: 2585128564965718986}
+        m_TargetAssemblyTypeName: DeathScenePlaced, Assembly-CSharp
         m_MethodName: Die
         m_Mode: 1
         m_Arguments:
@@ -105,25 +119,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7324518613124471480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7391426165747512973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fde6503dce31784d9c25164d2e63938, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeathWithGameObject:
-    m_PersistentCalls:
-      m_Calls: []
-  DestroyOnDeath: 1
 --- !u!65 &8760197648979412752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -158,6 +153,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: {fileID: 11400000, guid: 0f835494a99db2e40ba6e813f43b607f, type: 2}
+--- !u!114 &7568075087028958515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391426165747512973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c2a4a8071652e45b27369d6c47e72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animation: {fileID: 5509421898803025991}
+--- !u!111 &5509421898803025991
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391426165747512973}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: bc7d02dc8d783674282c2f5b5a0eb022, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bc7d02dc8d783674282c2f5b5a0eb022, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
+--- !u!114 &2585128564965718986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391426165747512973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7520eecd2192ef4d96e5795ceff034c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathWithGameObject:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1010997918553065532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211,13 +254,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: f2b9c9ae041901a4da2c482b9211b672, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f2b9c9ae041901a4da2c482b9211b672, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1e9535572be16514a8fb9a41dfab99d8, type: 2}
+      objectReference: {fileID: 2100000, guid: 88ef39b03bca93e4da4cb3a0ade49de4, type: 2}
     - target: {fileID: -7511558181221131132, guid: f2b9c9ae041901a4da2c482b9211b672, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 47e70f4d1af2d2045a9e09547572f23a, type: 2}
+      objectReference: {fileID: 2100000, guid: a5a80d5c3fb007a4ebbf6ed4709e3b92, type: 2}
     - target: {fileID: -7511558181221131132, guid: f2b9c9ae041901a4da2c482b9211b672, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
