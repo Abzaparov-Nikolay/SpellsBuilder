@@ -27,4 +27,9 @@ public class LosersMenu : MonoBehaviour
     {
         BootstrapManager.Instance.Disconnect();
     }
+
+    public void copyLink()
+    {
+        GUIUtility.systemCopyBuffer = "https://docs.google.com/forms/d/e/1FAIpQLSewQytG1FjiRAmoVC79aUWpQkUfzrzGn8VNTVdGjMjHtxmMnQ/viewform?usp=sf_link";
+    }
 }

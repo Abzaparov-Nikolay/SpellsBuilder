@@ -70,6 +70,19 @@ public class AreaTracker : NetworkBehaviour, IEnumerable<Transform>
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (!IsServer) return;
+        if (other.gameObject.activeInHierarchy
+            && other.gameObject.TryGetComponentInParent<TeamMember>(out var otherTeam)
+            //&& otherTeam.isHostileTo(team)
+            && teamsToTrack.Contains(otherTeam.Team) 
+            && !entitiesInRadius.Contains(other.transform))
+        {
+            entitiesInRadius.Add(other.transform);
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (!IsServer) return;

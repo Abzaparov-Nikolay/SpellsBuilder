@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 7850082105762139439}
   - component: {fileID: 1106185565761399343}
   - component: {fileID: 3061191965734158080}
+  - component: {fileID: 8452606280156755187}
   m_Layer: 0
   m_Name: FlynigEnemy
   m_TagString: Untagged
@@ -249,7 +250,7 @@ MonoBehaviour:
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
-  PositionThreshold: 0.001
+  PositionThreshold: 0.1
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   UseQuaternionSynchronization: 0
@@ -257,7 +258,7 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   Interpolate: 1
-  SlerpPosition: 0
+  SlerpPosition: 1
 --- !u!114 &7850082105762139439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +314,18 @@ MonoBehaviour:
     useLocal: 0
     localValue: 0
     variable: {fileID: 11400000, guid: 4f2775dbae613c743ad0c9c49f0ac006, type: 2}
+--- !u!114 &8452606280156755187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456423452554757681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1656217786258294317
 GameObject:
   m_ObjectHideFlags: 0
@@ -3882,6 +3895,9 @@ MonoBehaviour:
     localValue: 0
     variable: {fileID: 11400000, guid: c1a5e10c7744e654e874dd86c183ba69, type: 2}
   team: {fileID: 11400000, guid: 05dc8de82b1764949987a1d61b202053, type: 2}
+  OnDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6718680681036619767
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,10 @@ public class DamageDealer : Dealer
         {
             damageReceiver.TakeDamage(InventoryDamage * BaseDamage * DamageMultiplier.Value * (!healing.Value == true ? 1 : -1));
         }
+        if (target.TryGetComponentInParent<Destroyable>(out var damageRec))
+        {
+            damageRec.TakeDamage(BaseDamage);
+        }
     }
 
     public void AddDamageBonus(float percentage)

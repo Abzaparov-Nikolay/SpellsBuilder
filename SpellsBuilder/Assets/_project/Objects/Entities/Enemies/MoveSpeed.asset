@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dfdd90c8b497dc47b288f70fab7bb73, type: 3}
   m_Name: MoveSpeed
   m_EditorClassIdentifier: 
-  initialValue: 2
-  value: 2
+  initialValue: 1.8
+  value: 1.8
   resetBetweenScenes: 1

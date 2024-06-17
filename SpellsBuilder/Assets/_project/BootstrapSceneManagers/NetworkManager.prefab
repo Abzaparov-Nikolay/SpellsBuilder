@@ -97,6 +97,6 @@ MonoBehaviour:
     Port: 59975
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
-    PacketDelayMS: 60
-    PacketJitterMS: 20
+    PacketDelayMS: 120
+    PacketJitterMS: 30
     PacketDropRate: 0

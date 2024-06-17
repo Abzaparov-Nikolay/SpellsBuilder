@@ -16,9 +16,9 @@ MonoBehaviour:
   ModifierPower: 0
   Healing: 0
   Damage: 0
-  Size: 0
+  Size: 3
   Health: 0
-  Lifetime: 0
+  Lifetime: 5
   StatusPower: 0
   UseStatusEffect: 0
   StatusEffect: 0
@@ -27,3 +27,6 @@ MonoBehaviour:
   SpawnImpulse: 0
   FiredPrefab: {fileID: 7880820109166112199, guid: a4c4cdcac9c72ba4284f2da2910bf1f8, type: 3}
   AttackSpawnType: 0
+  PullOut: 0
+  PullForce: 0
+  PullArea: 0

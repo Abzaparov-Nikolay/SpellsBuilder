@@ -25,7 +25,7 @@ public class ElementsUIPlayer : MonoBehaviour
         foreach(var el in elements)
         {
             var elem= Instantiate(elementUIPrefab, elementsParent.transform);
-            elem.GetComponent<ElementUI>().SetFromImage(el.Image);
+            elem.GetComponent<ElementUI>().SetFromImage(el.Material);
         }
     }
 

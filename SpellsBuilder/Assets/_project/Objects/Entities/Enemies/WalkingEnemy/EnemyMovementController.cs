@@ -16,7 +16,8 @@ public class EnemyMovementController : NetworkBehaviour
         if (!IsServer) return;
         var dir = directionProvider.GetMoveDirection().NoY().normalized;
         body.velocity = dir * moveSpeed;
-        body.rotation = Quaternion.LookRotation(dir, Vector3.up);
+        if (dir != Vector3.zero)
+            body.rotation = Quaternion.LookRotation(dir, Vector3.up);
         if (stop)
         {
             body.velocity = Vector3.zero;

@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        uPnPHelper.CloseAll();
+        //uPnPHelper.CloseAll();
         if(NetworkManager.Singleton!= null)
         {
             NetworkManager.Singleton.OnClientStarted -= ActivateButton;

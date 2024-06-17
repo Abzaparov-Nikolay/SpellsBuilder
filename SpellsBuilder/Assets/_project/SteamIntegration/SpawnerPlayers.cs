@@ -20,7 +20,7 @@ public class SpawnerPlayers : NetworkBehaviour
 
     public void SpawnPlayer()
     {
-        SpawnPlayerServerRpc(base.NetworkManager.LocalClientId);
+        SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
     }
 
     [ServerRpc(RequireOwnership = false)]

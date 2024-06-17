@@ -28,7 +28,7 @@ public class CameraRotater : MonoBehaviour
     {
         while (true)
         {
-            transform.RotateAround(transform.position, Vector3.up, left ? 1 : -1);
+            transform.RotateAround(transform.position, Vector3.up, left ? -2 : 2);
             //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + 1, transform.rotation.z);
             yield return null;
         }

@@ -12,6 +12,8 @@ public abstract class SpellConfigurator : NetworkBehaviour
 
     protected List<ElementType> modifiersList = new();
 
+    protected ulong TrueOwnerId;
+
     [SerializeField] private ModifierList buffs;
 
     [SerializeField] protected bool sizable = true;
@@ -20,6 +22,17 @@ public abstract class SpellConfigurator : NetworkBehaviour
     {
         modifiersList = elements;
         StartCoroutine(ApplyModifiersLate());
+    }
+
+    public void SetOwner(ulong ownerId)
+    {
+        TrueOwnerId = ownerId;
+        OnOwnerSet();
+    }
+
+    protected virtual void OnOwnerSet()
+    {
+
     }
 
     public override void OnNetworkSpawn()

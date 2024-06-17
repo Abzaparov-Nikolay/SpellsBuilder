@@ -11,7 +11,8 @@ public class Element : ScriptableObject
     [SerializeField] protected List<ElementCombination> UsedIn;
     public ElementType Type;
     public int Power;
-    public Sprite Image;
+    //public Sprite Image;
+    public Material Material;
 
     public bool CanOrder(List<Element> previous)
     {

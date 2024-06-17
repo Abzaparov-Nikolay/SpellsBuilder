@@ -103,6 +103,7 @@ public class GameStater : NetworkBehaviour
         if (!IsServer)
             return;
         GameWonClientRpc();
+        StopGame();
     }
 
     [ClientRpc]
@@ -120,6 +121,7 @@ public class GameStater : NetworkBehaviour
         {
             GamePaused?.Invoke();
         }
+        _instance.stopSources = 1;
     }
 
     public static void Continue()

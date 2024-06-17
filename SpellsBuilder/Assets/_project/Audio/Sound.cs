@@ -6,25 +6,27 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Sound : NetworkBehaviour
+public class Sound : MonoBehaviour
 {
     [SerializeField] private ShitAssSound[] sounds;
     [SerializeField] private AudioSource source;
 
+    public Action<string, bool> SoundPlaying;
+
     public void PlaySound(string soundName)
     {
-        if (!IsServer) return;
-        PLayClientRpc(soundName, false);
+        
+        Play(soundName, false);
     }
 
     public void PlayDestroying(string name)
     {
-        if(!IsServer) return;
-        PLayClientRpc(name, true);
+        
+        Play(name, true);
     }
 
-    [ClientRpc]
-    public void PLayClientRpc(string name, bool destroying)
+    
+    public void Play(string name, bool destroying)
     {
         var sas = sounds.FirstOrDefault(s => s.name == name);
         if (sas.sound != null)
@@ -38,6 +40,7 @@ public class Sound : NetworkBehaviour
                 AudioSource.PlayClipAtPoint(sas.Get(), transform.position, sas.volume);
 
             }
+            SoundPlaying?.Invoke(name, destroying);
         }
     }
 

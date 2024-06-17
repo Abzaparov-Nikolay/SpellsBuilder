@@ -84,7 +84,7 @@ public class MagicInputHandler : NetworkBehaviour
 
     private bool CanOrder(Element type)
     {
-        return type.CanOrder(GetElementsOrder());
+        return CurrentOrder.Count < 5 && type.CanOrder(GetElementsOrder());
     }
 
     private void AddToOrder(int type)

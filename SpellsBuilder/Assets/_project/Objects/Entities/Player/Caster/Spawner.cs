@@ -44,7 +44,8 @@ public class Spawner : NetworkBehaviour
         SpawnServerServerRpc(new SpawnData(bytes,
             SpawnPoint.position,
             SpawnPoint.rotation,
-            NetworkManager.LocalClientId));
+            NetworkObject.OwnerClientId));
+        //NetworkManager.Singleton.LocalClientId));
         //bytes.Dispose();
 
     }
@@ -65,8 +66,9 @@ public class Spawner : NetworkBehaviour
             return null;
         }
         var max = order.MinBy(el => el.Power);
-        var sameTypeSpells = AllSpells.Where(spell => spell.elementsRequired.MinBy(el => el.Power).Power == max.Power).ToList();
-        var neededSpell = sameTypeSpells.MaxBy(spell =>
+        var sameTypeSpells = AllSpells.Where(spell => spell.elementsRequired.MinBy(el => el.Power) == max);
+        var gotAllElements = sameTypeSpells.Where(spell => spell.elementsRequired.All(el => order.Contains(el)));
+        var neededSpell = gotAllElements.MaxBy(spell =>
         {
             int same = 0;
             foreach (var reqEl in spell.elementsRequired)
@@ -112,13 +114,17 @@ public class Spawner : NetworkBehaviour
             var no = spawned.GetComponent<NetworkObject>();
             spawned.GetComponent<SpellConfigurator>()
                 .SetModifiers(modifiers.Select(el => el.Type).ToList());
-            no.SpawnWithOwnership(data.clientId, true);
+            //no.SpawnWithOwnership(NetworkManager.LocalClientId, true);
+            no.Spawn(true);
             if (spell.castType == CastType.Hold)
             {
                 no.TrySetParent(base.NetworkObject, true);
+
                 holdableSpells.Add(spawned);
 
             }
+            spawned.GetComponent<SpellConfigurator>().SetOwner(data.clientId);
+
 
 
 
@@ -151,7 +157,7 @@ public class Spawner : NetworkBehaviour
     {
         if (holdableSpells.Count != 0)
         {
-            foreach(var go in holdableSpells)
+            foreach (var go in holdableSpells)
             {
                 Destroy(go);
             }
@@ -194,6 +200,7 @@ public class Spawner : NetworkBehaviour
             serializer.SerializeValue(ref values);
             serializer.SerializeValue(ref spawnPosition);
             serializer.SerializeValue(ref rotation);
+            serializer.SerializeValue(ref clientId);
         }
     }
 }

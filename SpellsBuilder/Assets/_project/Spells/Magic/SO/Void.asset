@@ -16,4 +16,4 @@ MonoBehaviour:
   UsedIn: []
   Type: 2
   Power: 2
-  Image: {fileID: 21300000, guid: b12102d3d011b35408d3e0f0de036c36, type: 3}
+  Material: {fileID: 2100000, guid: e027e9ac79e6b73488f40bd8a7179b1e, type: 2}

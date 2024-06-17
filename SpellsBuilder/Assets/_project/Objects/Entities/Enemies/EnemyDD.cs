@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyDD : NetworkBehaviour
 {
@@ -10,6 +11,8 @@ public class EnemyDD : NetworkBehaviour
     [SerializeField] private Reference<float> baseDamage;
     [SerializeField] private Reference<float> damageMultiplier;
     [SerializeField] private Team team;
+    [SerializeField] private UnityEvent<GameObject> OnDeal;
+
     private void OnTriggerStay(Collider collider)
     {
         if(!IsServer) return;
@@ -19,6 +22,9 @@ public class EnemyDD : NetworkBehaviour
             && collider.gameObject.TryGetComponentInParent<DamageReceiver>(out var receiver))
         {
             receiver.TakeDamage(baseDamage * damageMultiplier);
+            OnDeal?.Invoke(receiver.gameObject);
         }
     }
+
+
 }

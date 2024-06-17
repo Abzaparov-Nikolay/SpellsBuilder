@@ -77,6 +77,7 @@ public class BootstrapManager : MonoBehaviour
     public void ClosePorts()
     {
         uPnPHelper.CloseAll();
+        uPnPHelper.NewMessage -= LogMessage;
     }
 
     private void OnDestroy()

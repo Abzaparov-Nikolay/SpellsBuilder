@@ -9,24 +9,24 @@ public class AnimationStateSetter : NetworkBehaviour
 {
     [SerializeField] private Animator animator;
 
-    private NetworkVariable<AnimationData> data = new();
+    private NetworkVariable<AnimationData> data = new(writePerm: NetworkVariableWritePermission.Owner);
 
     public void Set(PlayerState state)
     {
         if (base.IsOwner)
-            SetServerServerRpc(state);
+            SetServer(state);
     }
 
     public void CastStarted()
     {
         if (base.IsOwner)
-            SetServerCastingServerRpc(true);
+            SetServerCasting(true);
     }
 
     public void CastEnded()
     {
         if (base.IsOwner)
-            SetServerCastingServerRpc(false);
+            SetServerCasting(false);
     }
 
     public override void OnNetworkSpawn()
@@ -52,22 +52,22 @@ public class AnimationStateSetter : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
-    private void SetServerWalkingServerRpc(bool isWalking)
+    //[ServerRpc]
+    private void SetServerWalking(bool isWalking)
     {
         data.Value = new AnimationData(isWalking, data.Value.casting);
         //UpdateAnimator();
     }
 
-    [ServerRpc]
-    private void SetServerCastingServerRpc(bool isCasting)
+    //[ServerRpc]
+    private void SetServerCasting(bool isCasting)
     {
         data.Value = new AnimationData(data.Value.walking, isCasting);
         //UpdateAnimator();
     }
 
-    [ServerRpc]
-    private void SetServerServerRpc(PlayerState state)
+    //[ServerRpc]
+    private void SetServer(PlayerState state)
     {
         data.Value = new AnimationData(state == PlayerState.Walking, data.Value.casting);
         //UpdateAnimator();
