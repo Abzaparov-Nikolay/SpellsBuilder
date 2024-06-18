@@ -43,8 +43,8 @@ public class BootstrapManager : MonoBehaviour
     public void HostLobby(string ipAddress, ushort port)
     {
         uPnPHelper.NewMessage += LogMessage;
-        uPnPHelper.Start(uPnPHelper.Protocol.UDP, port, 0, "KolyaTest");
-        uPnPHelper.Start(uPnPHelper.Protocol.TCP, port, 0, "KolyaTest");
+        uPnPHelper.Start(uPnPHelper.Protocol.UDP, port, 0, "SpellsBuilder");
+        uPnPHelper.Start(uPnPHelper.Protocol.TCP, port, 0, "SpellsBuilder");
 
         (NetworkManager.Singleton.NetworkConfig.NetworkTransport as UnityTransport)
             .SetConnectionData("0.0.0.0", port, "0.0.0.0");
@@ -57,8 +57,8 @@ public class BootstrapManager : MonoBehaviour
     {
         uPnPHelper.NewMessage += LogMessage;
 
-        uPnPHelper.Start(uPnPHelper.Protocol.UDP, port, 0, "KolyaTest");
-        uPnPHelper.Start(uPnPHelper.Protocol.TCP, port, 0, "KolyaTest");
+        uPnPHelper.Start(uPnPHelper.Protocol.UDP, port, 0, "SpellsBuilder");
+        uPnPHelper.Start(uPnPHelper.Protocol.TCP, port, 0, "SpellsBuilder");
 
         (NetworkManager.Singleton.NetworkConfig.NetworkTransport as UnityTransport)
             .SetConnectionData(ipAddress, port);
